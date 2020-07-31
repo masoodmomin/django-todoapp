@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+
+<nav class="nav-extended #212121 #009688 teal">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo center">ToDoApp</a>
+  </div>
+  <div class="nav-content">
+    <div class="row">
+      <div class="col s8 push-s2 input-field center">
+        <form method="POST" action="add_todo/">
+          <input style="color: white; text-align: center;" name="content" placeholder="Add todo..." id="" type="text" autofocus>
+        </form>
+      </div>
+    </div>
+    <ul class="tabs tabs-transparent row">
+      <li class="tab col s4"><a class="active" href="#all">All</a></li>
+      <li class="tab col s4"><a href="#completed">Completed</a></li>
+      <li class="tab col s4"><a href="#incomplete">Incomplete</a></li>
+    </ul>
+  </div>
+</nav>
+<ul id="all" class="collection" style="margin-top: 0px;">
+  {% for todo in todos %}
+  <li class="collection-item">
+    <div>
+      <a href="complete/{{todo.id}}/">
+        {% if todo.is_completed == True %}
+        <i class="material-icons left">check</i>
+        <strike>{{ todo.text }}</strike>
+        {% endif %}
+        
+        {% if todo.is_completed == False %}
+        <i class="material-icons left">check_box_outline_blank</i>
+        {{ todo.text }}
+        {% endif %}
+      </a>
+      <a href="delete_todo/{{todo.id}}/" class="secondary-content"><i class="material-icons">delete</i></a></div>
+  </li>
+  {% endfor %}
+</ul>
+
+<ul id="completed" class="collection" style="margin-top: 0px;">
+  {% for todo in todos %}
+  {% if todo.is_completed == True %}
+  <li class="collection-item">
+    <div>
+      <a href="complete/{{todo.id}}/">
+        {% if todo.is_completed == True %}
+        <i class="material-icons left">check</i>
+        <strike>{{ todo.text }}</strike>
+        {% endif %}
+
+        {% if todo.is_completed == False %}
+        <i class="material-icons left">check_box_outline_blank</i>
+        {{ todo.text }}
+        {% endif %}
+      </a>
+      <a href="delete_todo/{{todo.id}}/" class="secondary-content"><i class="material-icons">delete</i></a></div>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+
+<ul id="incomplete" class="collection" style="margin-top: 0px;">
+  {% for todo in todos %}
+  {% if todo.is_completed == False %}
+  <li class="collection-item">
+    <div>
+      <a href="complete/{{todo.id}}/">
+        {% if todo.is_completed == True %}
+        <i class="material-icons left">check</i>
+        <strike>{{ todo.text }}</strike>
+        {% endif %}
+        
+        {% if todo.is_completed == False %}
+        <i class="material-icons left">check_box_outline_blank</i>
+        {{ todo.text }}
+        {% endif %}
+       
+      </a>
+      <a href="delete_todo/{{todo.id}}/" class="secondary-content"><i class="material-icons">delete</i></a></div>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
+
+
+{% endblock %}
