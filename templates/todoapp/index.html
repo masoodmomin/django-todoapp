@@ -2,16 +2,28 @@
 
 {% block content%}
 
+<style>
+  .todo-input {
+    padding: 5px !important;
+    font-size: 16px !important;
+    margin-top: 25px !important;
+    border-width: 1px !important;
+    text-align: center;
+    border-color: #67b8b8 !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-style: solid !important;
+    border-radius: 5px !important;
+    box-shadow: 0px 0px 8px rgba(198, 230, 230, .44) !important;
+  }
+</style>
 
 <nav class="nav-extended #212121 #009688 teal">
-  <div class="nav-wrapper">
-    <a href="#" class="brand-logo center">ToDoApp</a>
-  </div>
   <div class="nav-content">
     <div class="row">
-      <div class="col s8 push-s2 input-field center">
+      <div class="container">
         <form method="POST" action="add_todo/">
-          <input style="color: white; text-align: center;" name="content" placeholder="Add todo..." id="" type="text" autofocus>
+          <input class="todo-input" placeholder="Add todo..." name="content" id="" type="text" autofocus>
         </form>
       </div>
     </div>
@@ -31,7 +43,7 @@
         <i class="material-icons left">check</i>
         <strike>{{ todo.text }}</strike>
         {% endif %}
-        
+
         {% if todo.is_completed == False %}
         <i class="material-icons left">check_box_outline_blank</i>
         {{ todo.text }}
@@ -75,18 +87,16 @@
         <i class="material-icons left">check</i>
         <strike>{{ todo.text }}</strike>
         {% endif %}
-        
+
         {% if todo.is_completed == False %}
         <i class="material-icons left">check_box_outline_blank</i>
         {{ todo.text }}
         {% endif %}
-       
+
       </a>
       <a href="delete_todo/{{todo.id}}/" class="secondary-content"><i class="material-icons">delete</i></a></div>
   </li>
   {% endif %}
   {% endfor %}
 </ul>
-
-
 {% endblock %}
